@@ -1,0 +1,41 @@
+<div id="topSalaries">
+
+</div>
+<hr>
+<div id="topEmployees">
+
+</div>
+<hr>
+<div id="container">
+  <!-- populated by JS-->
+</div>
+<script src="./boston.js"></script>
+<script>
+  var newObject = [];
+  function renderBoston(boston, container) {
+    var person = boston.data;
+    var len = boston.data.length;
+    var html = '';
+    var html2 = '';
+    var html3 = '';
+    for (let i = 0; i < len; i++) {
+      html += '<li class="post">' +
+        '<h2>' + person[i][8] + '</h2>' +
+        '<h3>' + person[i][11] + '</h3>';
+        newObject[i] = {salary: person[i][11], name: person[i][8]};
+        if (newObject[i].salary >= 200000) {
+          html3 += newObject[Object.keys(newObject)[i]].name + ' ' + newObject[Object.keys(newObject)[i]].salary + '<br>';
+        }
+    }
+    container.innerHTML = '<ul id = "boston">' + html + '</ul>';
+    newObject.sort(function (x, y) {
+      return y.salary - x.salary;
+    })
+    for (let i=0; i < 5; i++) {
+      html2 += newObject[Object.keys(newObject)[i]].name + ' ' + newObject[Object.keys(newObject)[i]].salary + '<br>';
+    }
+    document.getElementById('topSalaries').innerHTML = html2;
+    document.getElementById('topEmployees').innerHTML = html3;
+  }
+  renderBoston(boston, document.getElementById('container'));
+</script>
